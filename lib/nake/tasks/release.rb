@@ -35,9 +35,9 @@ end
 Task.new("release:gemcutter") do |task|
   task.description  = "Push gem to Gemcutter"
   task.dependencies = [:clean, :build]
+  task.extend(PackageMixin)
   task.define do
-    task.config[:gem] = "#{Task[:release].config[:name]}-#{Task[:release].config[:version]}.gem"
     puts "Pushing to Gemcutter ..."
-    sh "gem push #{task.config[:gem]}"
+    sh "gem push #{self.gem_name}"
   end
 end
