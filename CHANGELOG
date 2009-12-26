@@ -1,0 +1,9 @@
+= Version 0.0.1
+  * bin/nake executable
+  * sh helper (nake/helpers)
+  * task helper (nake/dsl)
+  * Task with description, dependencies and blocks
+  * Hidden tasks
+  * Each task can has multiple aliases
+  * Command line arguments parsing. Arguments will be passed as an arguments for blocks of the given task and options will be extracted into a hash, parsed into Ruby data types and passed as the last argument for the blocks.
+  * Default tasks for help (-H, --help), list of available tasks (-T, --tasks) and interactive session (-i, --interactive)

@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), "..", "lib")
+
+require "nake"
+
+# First argument has to be path to file with your tasks
+load ARGV.first
+
+# Parse arguments and run tasks
+begin
+  Nake.run(ARGV[1..-1])
+rescue TaskNotFound => exception
+  abort "[#{"ERROR".red}] #{exception.message}"
+end

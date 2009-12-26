@@ -1,0 +1,24 @@
+h1. About
+
+Nake is light-weight and highly flexible Rake replacement with much better arguments parsing.
+
+You might be wondering why to write yet another fucking task manager when we have Rake, Thor and others. Well, because all of them sucks. For example Rake, anyone is actually using its CLI arguments, because it sucks so much, that everyone rather write @ENV=test VERSION=10 rake db:migrate@. It has not just shitty API for defining CLI arguments, but also it is using very weird and totally non-unix syntax like @rake db:migrate[test,10]@. This syntax isn't just non-standard, but also some shells has @[]@ as special characters, so you actually has to escape it.
+
+Sounds terrible? Well and it's not all! Let's take a look at this "example":http://gist.github.com/263325, as you can see if you have argument path and you let it empty, than it takes environment variable @$PATH@! I contact Jim Weirich about this issue and he never replied, so he probably thinks it's fine. Fair enough, but I won't work with such tool.
+
+h1. Features
+
+- Tasks can have a *name*, *description*, *dependencies*, *aliases* and *blocks* which will be executed when the task is called. Task can be also hidden if you don't want to list it in the list of available tasks.
+- You can use `nake` in *shebang*, so you can use your file with tasks as a runner.
+- *Arguments parsing*, everything what start with @--@ will be passed into options hash and everything other will be treated as an arguments. Both arguments and options will be passed as a block arguments for task, so you don't have to learn any new API, just use normal Ruby expressions as you are used to. Options are parsed into Ruby data types, so if you have @--without-mysql@, you'll get @{mysql: false}@, if you have @--name=botanicus@, you'll get @{name: "botanicus"}@ etc.
+- *Arbitrary names of tasks* is one of the key features of Nake. This way you can *namespace* your tasks (like @nake build:prerelease@) or you can define tasks like @-T@.
+- Two level of API for defining tasks. @task@ helper is useful for defining simple tasks and if you need something more complicated, you can use @Task.new@
+- *Interactive session* if you run @nake -i@ or @nake -i task@ you get an interactive nake session.
+
+h1. Usage
+
+First of all there is a bunch of "examples":github.com/botanicus/nake/tree/master/examples, so you can try them. All these scripts are executable, so just run @./executable/basic.rb -T@ and that's it!
+
+h1. Links
+
+- http://github.com/botanicus/filelist

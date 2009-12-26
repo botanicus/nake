@@ -1,0 +1,7 @@
+- fix interactive task, it doesn't work so far
+- better argv parsing maybe, task(:spec) do |*paths, options| is fine, but task(:spec) do |path, options| will fail if no path specified ... but actually task(:spec) do |path = "spec", options| might be fine, try it ... BTW task(["-i", "--interactive"]) do |task, *args, options| doesn't work ... putting options as a first argument should solve everything, but it's not very intuitive :/
+- it might be worthy to steal filelist from Rake
+- how to solve args inheriting (like if we have task release which depends on task build which takes a gemspec as an argument)
+- benchmarks against rake
+- maybe some of: fileutils extensions, multitask, rule, file, directory (from rake, see http://rake.rubyforge.org/files/doc/rakefile_rdoc.html)
+- some default tasks like nake/tasks/package, nake/tasks/clean, nake/tasks/yardoc, nake/tasks/spec, nake/tasks/bundle
