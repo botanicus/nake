@@ -3,7 +3,7 @@
 # this will be probably in a library
 Task.new(:build) do |task|
   task.define do
-    exec "gem build #{task.config[:gemspec]}"
+    sh "gem build #{task.config[:gemspec]}"
   end
 end
 
