@@ -4,7 +4,7 @@ require "nake/argv"
 require "nake/task"
 
 module Nake
-  VERSION ||= "0.0.3"
+  VERSION ||= "0.0.4"
   TaskNotFound ||= Class.new(StandardError)
   ConfigurationError ||= Class.new(StandardError)
 
