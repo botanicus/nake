@@ -21,4 +21,10 @@ First of all there is a bunch of "examples":github.com/botanicus/nake/tree/maste
 
 h1. Links
 
-- http://github.com/botanicus/filelist
+* "RDoc.info API Docs":http://rdoc.info/projects/botanicus/nake
+* "Yardoc.org API Docs":http://yardoc.org/docs/botanicus-nake
+* "Examples":http://github.com/botanicus/nake-examples
+* "Bug reporting":http://github.com/botanicus/nake/issues
+* "Caliper Code Metrics":http://devver.net/caliper/project?repo=git%3A%2F%2Fgithub.com%2Fbotanicus%2Fnake.git
+
+* http://github.com/botanicus/filelist
