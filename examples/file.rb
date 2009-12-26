@@ -6,8 +6,13 @@ rescue LoadError
   raise LoadError, "This task require recho gem!"
 end
 
-directory "www"
+directory "tmp"
+directory "tmp/www"
 
-file "www/index.html", "www" do
-  echo("<html>Hello World!</html>") > "www/index.html"
+file("tmp/restart.txt", "tmp") do |path|
+  touch path
+end
+
+file "tmp/www/index.html", "tmp/www" do |path|
+  echo("<html>Hello World!</html>") > path
 end
