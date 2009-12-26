@@ -10,10 +10,10 @@ module Nake
   def self.run(args = ARGV)
     name = args.shift
     task = Task[name]
-    if name && task.nil?
-      raise TaskNotFound, "Task with name #{name} doesn't exist"
-    elsif name.nil? && task.nil?
+    if name.nil?
       raise TaskNotFound, "You have to specify a task you want to run!"
+    elsif task.nil?
+      raise TaskNotFound, "Task with name #{name} doesn't exist"
     else
       task.run(args)
     end
