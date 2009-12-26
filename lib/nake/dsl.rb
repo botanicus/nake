@@ -17,4 +17,13 @@ class Object
       end
     end
   end
+  
+  def directory(path)
+    FileTask.new(path) do |task|
+      task.description = "Create directory #{path}"
+      task.define do
+        mkdir_p path
+      end
+    end
+  end
 end
