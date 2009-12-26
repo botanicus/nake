@@ -10,6 +10,6 @@ load ARGV.first
 # Parse arguments and run tasks
 begin
   Nake.run(ARGV[1..-1])
-rescue TaskNotFound => exception
+rescue TaskNotFound, ConfigurationError => exception
   abort "[#{"ERROR".red}] #{exception.message}"
 end

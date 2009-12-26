@@ -4,8 +4,9 @@ require "nake/argv"
 require "nake/task"
 
 module Nake
-  VERSION ||= "0.0.1"
+  VERSION ||= "0.0.2"
   TaskNotFound ||= Class.new(StandardError)
+  ConfigurationError ||= Class.new(StandardError)
 
   def self.run(args = ARGV)
     name = args.shift

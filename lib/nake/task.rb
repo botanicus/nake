@@ -30,7 +30,7 @@ module Nake
       task && task.setup(*dependencies, &block) || super(name, *dependencies, &block)
     end
 
-    attr_accessor :name, :description, :dependencies, :hidden, :options
+    attr_accessor :name, :description, :dependencies, :hidden
     attr_reader :blocks, :aliases
     def initialize(name, *dependencies, &block)
       @aliases, @hidden = Array.new, false
@@ -45,6 +45,12 @@ module Nake
       @dependencies  = Array.new
       self.register
       self.setup(*dependencies, &block)
+    end
+
+    def config
+      @config ||= Hash.new do |hash, key|
+        raise ConfigurationError, "Configuration key #{key} in task #{name} doesn't exist"
+      end
     end
 
     def setup(*dependencies, &block)
