@@ -10,3 +10,6 @@
 
 = Version 0.0.2
   * Support for configuration
+  * A lot of useful tasks for releasing, prereleasing, bundling, specs, clean etc.
+
+= Version 0.0.3
