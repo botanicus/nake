@@ -11,6 +11,7 @@ h1. Features
 - Tasks can have a *name*, *description*, *dependencies*, *aliases* and *blocks* which will be executed when the task is called. Task can be also hidden if you don't want to list it in the list of available tasks.
 - You can use `nake` in *shebang*, so you can use your file with tasks as a runner.
 - *Arguments parsing*, everything what start with @--@ will be passed into options hash and everything other will be treated as an arguments. Both arguments and options will be passed as a block arguments for task, so you don't have to learn any new API, just use normal Ruby expressions as you are used to. Options are parsed into Ruby data types, so if you have @--without-mysql@, you'll get @{mysql: false}@, if you have @--name=botanicus@, you'll get @{name: "botanicus"}@ etc.
+- *Configuration support*, so you don't have to use bunch of constants as in Rake. Example: @Task[:clean].config[:files] = Dir.glob("*.gem")@
 - *Arbitrary names of tasks* is one of the key features of Nake. This way you can *namespace* your tasks (like @nake build:prerelease@) or you can define tasks like @-T@.
 - Two level of API for defining tasks. @task@ helper is useful for defining simple tasks and if you need something more complicated, you can use @Task.new@
 - *Interactive session* if you run @nake -i@ or @nake -i task@ you get an interactive nake session.
