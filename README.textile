@@ -23,7 +23,7 @@ h1. Links
 
 * "RDoc.info API Docs":http://rdoc.info/projects/botanicus/nake
 * "Yardoc.org API Docs":http://yardoc.org/docs/botanicus-nake
-* "Examples":http://github.com/botanicus/nake-examples
+* "Examples":http://github.com/botanicus/nake/tree/master/examples
 * "Bug reporting":http://github.com/botanicus/nake/issues
 * "Caliper Code Metrics":http://devver.net/caliper/project?repo=git%3A%2F%2Fgithub.com%2Fbotanicus%2Fnake.git
 
