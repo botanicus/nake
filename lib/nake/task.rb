@@ -4,6 +4,9 @@ require "nake/colors"
 require "nake/argv"
 
 module Nake
+  TaskNotFound ||= Class.new(StandardError)
+  ConfigurationError ||= Class.new(StandardError)
+
   class Task
     def self.[](name)
       name = name.to_s
@@ -79,11 +82,11 @@ module Nake
     # but when we use splat, then we will have to call it at least with Hash.new for options
     def call(args = Array.new, options = Hash.new)
       unless self.dependencies.empty?
-        puts "~ Invoking task #{name}".cyan
+        info "Invoking task #{name}"
         self.invoke_dependencies(*args, options)
       end
       unless self.blocks.empty?
-        puts "~ Executing task #{name} with arguments #{args.inspect} and options #{options.inspect}".green
+        note "Executing task #{name} with arguments #{args.inspect} and options #{options.inspect}"
         self.blocks.each do |block|
           if block.arity.eql?(0)
             block.call
