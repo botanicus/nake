@@ -1,6 +1,5 @@
 # encoding: utf-8
 
-require "nake/argv"
 require "nake/task"
 
 module Nake
@@ -15,9 +14,9 @@ module Nake
       raise TaskNotFound, "Task with name #{name} doesn't exist"
     elsif name.nil? && task.nil?
       raise TaskNotFound, "You have to specify a task you want to run!"
+    else
+      task.run(args)
     end
-    opts = args.extend(ArgvParsingMixin).extract!
-    task.call(args, opts)
   end
 end
 

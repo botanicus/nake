@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require "nake/colors"
+require "nake/argv"
 
 module Nake
   class Task
@@ -30,7 +31,7 @@ module Nake
       task && task.setup(*dependencies, &block) || super(name, *dependencies, &block)
     end
 
-    attr_accessor :name, :description, :dependencies, :hidden
+    attr_accessor :name, :description, :dependencies, :hidden, :original_args
     attr_reader :blocks, :aliases
     def initialize(name, *dependencies, &block)
       @aliases, @hidden = Array.new, false
@@ -65,6 +66,12 @@ module Nake
 
     def hidden?
       @hidden
+    end
+
+    def run(args)
+      self.original_args = args
+      opts = args.extend(ArgvParsingMixin).extract!
+      self.call(args, opts)
     end
 
     # NOTE: the reason why we don't have splat for args is that when we have Task["-T"]
