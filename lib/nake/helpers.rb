@@ -1,17 +1,19 @@
 # encoding: utf-8
 
 require "fileutils"
-require "open3"
 
 module Nake
   module TaskHelpers
     include FileUtils
-    def sh(command)
-      puts "#{"$".magenta} #{command.cyan}"
-      Open3.popen3("sh", "-c", command) do |stdin, stdout, stderr|
-        puts stdout.readlines.map { |line| "  #{line}" }
-        puts stderr.readlines.map { |line| "  #{line.red}" }
-      end
+    alias_method :run, :`
+
+    # return true if process suceeded, false otherwise
+    # sh "ls -a"
+    # sh "ls", "-a"
+    def sh(*parts)
+      puts "#{"$".magenta} #{parts.join(" ").cyan}"
+      run "#{parts.shift} #{parts.join(" ")}"
+      $?.success?
     end
   end
 end
