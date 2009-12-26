@@ -10,6 +10,6 @@ Task[:clean].config[:files].push(*Dir["*.gem"])
 # Task[:build].config[:gemspec] = Dir["*.gemspec"]
 Task.new(:build) do |task|
   task.define do
-    exec "gem build #{task.config[:gemspec]}"
+    sh "gem build #{task.config[:gemspec]}"
   end
 end

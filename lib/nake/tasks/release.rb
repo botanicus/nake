@@ -15,6 +15,7 @@ task(:prerelease).tap do |task|
   task.description = "Update prerelease version"
   task.define do
     Task[:release].config[:version] = "#{Task[:release].config[:version]}.pre"
+    Task[:build].config[:gemspec] = Task[:build].config[:gemspec].sub(/\.gemspec/, ".pre.gemspec")
     Task["release:gemcutter"].call
   end
 end
@@ -35,7 +36,7 @@ Task.new("release:gemcutter") do |task|
   task.description  = "Push gem to Gemcutter"
   task.dependencies = [:clean, :build]
   task.define do
-    task.config[:gem] = "#{Task[:build].config[:gemspec]}-#{Task[:release].config[:version]}.gem"
+    task.config[:gem] = "#{Task[:release].config[:name]}-#{Task[:release].config[:version]}.gem"
     puts "Pushing to Gemcutter ..."
     sh "gem push #{task.config[:gem]}"
   end

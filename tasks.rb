@@ -7,4 +7,5 @@ require "nake/tasks/release"
 
 Task[:build].config[:gemspec] = "nake.gemspec"
 Task[:prerelease].config[:gemspec] = "nake.pre.gemspec"
+Task[:release].config[:name] = "nake"
 Task[:release].config[:version] = Nake::VERSION

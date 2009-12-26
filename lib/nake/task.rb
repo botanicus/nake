@@ -71,13 +71,13 @@ module Nake
     # which doesn't have any args and options, we wall just call it without any arguments,
     # but when we use splat, then we will have to call it at least with Hash.new for options
     def call(args = Array.new, options = Hash.new)
-      unless @dependencies.empty?
+      unless self.dependencies.empty?
         puts "~ Invoking task #{name}".cyan
         self.invoke_dependencies(*args, options)
       end
-      unless @blocks.empty?
+      unless self.blocks.empty?
         puts "~ Executing task #{name} with arguments #{args.inspect} and options #{options.inspect}".green
-        @blocks.each do |block|
+        self.blocks.each do |block|
           if block.arity.eql?(0)
             block.call
           else
