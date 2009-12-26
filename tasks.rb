@@ -1,12 +1,10 @@
 #!./bin/nake
 # encoding: utf-8
 
-task(:build) do
-  sh "gem build nake.gemspec"
-end
+require "nake/tasks/gem"
+require "nake/tasks/spec"
+require "nake/tasks/release"
 
-# ./tasks.rb spec/nake/argv_spec.rb spec/nake/task_spec.rb
-task(:spec) do |*paths, options|
-  paths.push("spec") if paths.empty?
-  exec "spec #{paths.join(" ")}"
-end
+Task[:build].config[:gemspec] = "nake.gemspec"
+Task[:prerelease].config[:gemspec] = "nake.pre.gemspec"
+Task[:release].config[:version] = Nake::VERSION
