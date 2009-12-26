@@ -87,6 +87,12 @@ module Nake
       end
     end
 
+    def reset!
+      self.dependencies.clear
+      self.blocks.clear
+      self.aliases.clear
+    end
+
     protected
     def invoke_dependencies(*args, options)
       self.dependencies.each do |name|
