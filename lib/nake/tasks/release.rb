@@ -7,7 +7,7 @@ require "nake/tasks/gem"
 task(:release, "release:tag", "release:gemcutter").tap do |task|
   task.description = "Release current version version"
   task.define do
-    puts "Version #{version} was successfuly published. Don't forget to increase VERSION constant!"
+    puts "Version #{task.config[:version]} was successfuly published. Don't forget to increase VERSION constant!"
   end
 end
 
