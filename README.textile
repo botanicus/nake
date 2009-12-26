@@ -20,6 +20,38 @@ h1. Usage
 
 First of all there is a bunch of "examples":github.com/botanicus/nake/tree/master/examples, so you can try them. All these scripts are executable, so just run @./executable/basic.rb -T@ and that's it!
 
+h1. Documentation
+
+h2. Tasks
+
+h3. Options parsing
+
+h2. File Tasks
+
+h2. Task Helpers
+
+h2. Available Tasks
+
+h3. Built-in Tasks
+
+- @-T@
+- @-H@
+- @-i@
+
+h3. File @nake/tasks/bundle@
+
+This file contains only @bundle@ task which will load bundler @--no-cached@
+
+h3. File @nake/tasks/clean@
+
+h3. File @nake/tasks/gem@
+
+h3. File @nake/tasks/release@
+
+h3. File @nake/tasks/rip@
+
+h3. File @nake/tasks/spec@
+
 h1. Links
 
 * "RDoc.info API Docs":http://rdoc.info/projects/botanicus/nake
