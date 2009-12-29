@@ -2,6 +2,17 @@
 
 module Nake
   module ArgvParser
+    def self.extract!(args)
+      args.dup.inject(Hash.new) do |options, argument|
+        key, value = self.parse(argument)
+        if key
+          options[key] = value
+          args.delete(argument)
+        end
+        options
+      end
+    end
+
     def self.extract(args)
       args.inject(Hash.new) do |options, argument|
         key, value = self.parse(argument)
