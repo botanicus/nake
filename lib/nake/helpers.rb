@@ -36,11 +36,15 @@ module Nake
     end
 
     def warn(message)
-      Kernel.warn("~ #{message.yellow}") if Nake.verbose
+      Kernel.warn("~ #{message.yellow}") if Nake.debug
+    end
+
+    def debug(message)
+      STDERR.puts("~ #{message.yellow}") if Nake.debug
     end
 
     def error(message)
-      STDERR.puts "~ #{message}".red if Nake.verbose
+      STDERR.puts "~ #{message}".red
     end
 
     def abort(message)
