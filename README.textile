@@ -4,7 +4,7 @@ Nake is light-weight and highly flexible Rake replacement with much better argum
 
 You might be wondering why to write yet another fucking task manager when we have Rake, Thor and others. Well, because all of them suck. For example Rake, anyone is actually using its CLI arguments, because it sucks so much, that everyone rather write @ENV=test VERSION=10 rake db:migrate@. It has not just shitty API for defining CLI arguments, but also it is using very weird and totally non-unix syntax like @rake db:migrate[test,10]@. This syntax isn't just non-standard, but also some shells has @[]@ as special characters, so you actually has to escape it.
 
-Sounds terrible? Well and it's not all! Let's take a look at this "example":http://gist.github.com/263325, as you can see if you have argument path and you let it empty, than it takes environment variable @$PATH@! I contact Jim Weirich about this issue and he never replied, so he probably thinks it's fine. Fair enough, but I won't work with such tool.
+Sounds terrible? Well and it's not all! Let's take a look at this "example":http://gist.github.com/263325, as you can see if you have argument path and you let it empty, than it takes environment variable @$PATH@! I contact Jim Weirich so I hope he will remove this awful bug, but hey, it's pretty bad anyway.
 
 h1. Features
 
