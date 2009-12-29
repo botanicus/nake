@@ -2,12 +2,13 @@
 
 require "nake/dsl"
 
-task(["-H", "--help"]) do
-  abort "\nUse #{$0} -T for list of all available tasks or -i for interactive session"
+argument("-H", "--help") do
+  Kernel.abort "Use #{$0} -T for list of all available tasks or -i for interactive session"
 end
 
-task(["-T", "--tasks"]) do |pattern, options = Hash.new|
+argument("-T", "--tasks") do |pattern = nil|
   tasks, options = Task.tasks.select { |name, task| not task.hidden? }.sort.partition { |key, value| not key.match(/^-/) }
+  arguments = Nake.args.sort
 
   puts "\n#{"===".yellow} #{"Available tasks".magenta} #{"===".yellow}"
   if tasks.empty?
@@ -18,18 +19,20 @@ task(["-T", "--tasks"]) do |pattern, options = Hash.new|
     end
   end
 
-  puts "\n#{"===".yellow} #{"Available options".magenta} #{"===".yellow}"
-  if options.empty?
-    puts "No options defined"
+  puts "\n#{"===".yellow} #{"Available arguments".magenta} #{"===".yellow}"
+  if arguments.empty?
+    puts "No arguments defined"
   else
-    options.each do |name, task|
-      puts "#{name.green} #{task.dependencies.join(", ")} # #{task.description || "no description yet"}"
+    arguments.each do |names, proc|
+      puts "#{names.join(" or ").green}" # TODO: description
     end
   end
+  exit
 end
 
-# TODO: this doesn't work so far
-task(["-i", "--interactive"]) do |*args, options|
+argument("-i", "--interactive") do |task = nil|
+  ARGV.clear # otherwise IRB will parse it
+
   require "irb"
   begin
     require "irb/readline"
@@ -37,13 +40,13 @@ task(["-i", "--interactive"]) do |*args, options|
     warn "Code completion via readline isn't available"
   end
 
-  unless args.empty?
-    task = Task[args.shift]
-    task.call(*args, options)
+  if task
+    Task[task].tap { |task| task.call(*args, options) }
   end
 
   IRB.start
+  exit!
 end
 
-Task["-T"].hidden = true
-Task["-H"].hidden = true
+Nake.args["--verbose", "--no-verbose"] = lambda { |key, value| Nake.verbose = value }
+Nake.args["--debug", "--no-debug"]     = lambda { |key, value| Nake.debug = value }
