@@ -52,8 +52,14 @@ module Nake
     end
 
     def config
-      @config ||= Hash.new do |hash, key|
-        raise ConfigurationError, "Configuration key #{key} in task #{name} doesn't exist"
+      @config ||= begin
+        Hash.new do |hash, key|
+          raise ConfigurationError, "Configuration key #{key} in task #{name} doesn't exist"
+        end.tap do |hash|
+          hash.define_singleton_method(:declare) do |*keys|
+            keys.each { |key| self[key] = nil }
+          end
+        end
       end
     end
 
@@ -73,7 +79,8 @@ module Nake
 
     def run(args)
       self.original_args = args
-      self.call(args, ArgvParser.extract(args))
+      options = ArgvParser.extract!(args)
+      self.call(args, options)
     end
 
     # NOTE: the reason why we don't have splat for args is that when we have Task["-T"]
@@ -86,12 +93,9 @@ module Nake
       end
       unless self.blocks.empty?
         note "Executing task #{name} with arguments #{args.inspect} and options #{options.inspect}"
+        debug "Config #{self.config.inspect}"
         self.blocks.each do |block|
-          if block.arity.eql?(0)
-            block.call
-          else
-            block.call(*args, options)
-          end
+          block.call(*args, options)
         end
       end
     end
