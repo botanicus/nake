@@ -3,7 +3,7 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
 require "nake"
-require "nake/tasks"
+require "nake/args"
 require "nake/helpers"
 
 # parse arguments
@@ -50,6 +50,8 @@ end
 # run tasks
 begin
   Nake.run_task
+rescue SystemExit => exception
+  exit exception.status
 rescue Exception => exception
   print_exception_with_backtrace_and_abort(exception)
 end
