@@ -1,10 +1,15 @@
 # encoding: utf-8
 
+require "nake"
 require "nake/task"
 require "nake/file_task"
 
 class Object
   include Nake
+  def argument(*names, &block)
+    Nake.args[*names] = block
+  end
+
   # Rake-style task definition
   # task(:release, :build) do |task|
   #   # task definition
