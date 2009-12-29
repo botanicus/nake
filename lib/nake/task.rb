@@ -73,8 +73,7 @@ module Nake
 
     def run(args)
       self.original_args = args
-      opts = args.extend(ArgvParsingMixin).extract!
-      self.call(args, opts)
+      self.call(args, ArgvParser.extract(args))
     end
 
     # NOTE: the reason why we don't have splat for args is that when we have Task["-T"]
