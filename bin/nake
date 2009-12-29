@@ -3,13 +3,53 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
 require "nake"
+require "nake/tasks"
+require "nake/helpers"
 
-# First argument has to be path to file with your tasks
-load ARGV.first
-
-# Parse arguments and run tasks
+# parse arguments
 begin
-  Nake.run(ARGV[1..-1])
-rescue TaskNotFound, ConfigurationError => exception
-  abort "[#{"ERROR".red}] #{exception.message}"
+  Nake.parse
+rescue Exception => exception
+  puts "~ Arguments parsed into #{Nake.parse.inspect.green}"
+  puts "Exception occured during parsing arguments"
+  print_exception_with_backtrace_and_abort(exception)
+else
+  if Nake.parse[:nake].include?("--debug") # Nake.debug isn't initialized yet
+    puts "~ Arguments parsed into #{Nake.parse.inspect.green}"
+  end
+end
+
+# load task file
+if Nake.parse[:file]
+  begin
+    load Nake.parse[:file]
+  rescue Exception => exception
+    print_exception_with_backtrace_and_abort(exception)
+  end
+else
+  abort "You have to specify a file with tasks"
+end
+
+# run arguments
+# yes, arguments has to run after the task file is loaded
+begin
+  original_args = Nake.parse.dup
+  Nake.run_args
+rescue SystemExit => exception
+  exit exception.status
+rescue Exception => exception
+  puts "~ Arguments parsed into #{Nake.parse.inspect.green}"
+  puts "Exception occured setting nake flags"
+  print_exception_with_backtrace_and_abort(exception)
+else
+  if Nake.debug && Nake.parse != original_args
+    puts "~ Arguments changed into #{Nake.parse.inspect.green}"
+  end
+end
+
+# run tasks
+begin
+  Nake.run_task
+rescue Exception => exception
+  print_exception_with_backtrace_and_abort(exception)
 end
