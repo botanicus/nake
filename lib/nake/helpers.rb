@@ -52,7 +52,7 @@ module Nake
     end
 
     def print_exception_with_backtrace_and_abort(exception)
-      abort [exception.message, exception.backtrace.join("- ")].join("\n")
+      abort [exception.message, exception.backtrace.join("\n- ")].join("\n")
     end
   end
 end
