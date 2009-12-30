@@ -41,27 +41,16 @@ module Nake
   end
 
   def self.parse(args = ARGV)
-    @result ||= begin
-      result = args.inject(Hash.new) do |hash, argument|
-        hash[:nake] ||= Array.new
-        hash[:task] ||= Array.new
-        if argument.match(/^-/) && hash[:task].empty?
-          hash[:nake].push(argument)
-        elsif File.exist?(argument) && hash[:file].nil? # just the first one
-          hash[:file] = argument
-        else
-          hash[:task].push(argument)
-        end
-        hash
+    default = {nake: Array.new, task: Array.new}
+    args.inject(default) do |hash, argument|
+      if argument.match(/^-/) && hash[:task].empty?
+        hash[:nake].push(argument)
+      elsif File.exist?(argument) && hash[:file].nil? # just the first one
+        hash[:file] = argument
+      else
+        hash[:task].push(argument)
       end
-
-      # default value, useful when running nake on systems without
-      # shebang support, so you are using nake -T instead of ./tasks.rb -T
-      if result[:file].nil? && File.exist?("tasks.rb")
-        result[:file] = "tasks.rb"
-      end
-      
-      result
+      hash
     end
   end
 

@@ -33,7 +33,7 @@ class Object
       end
     end
   end
-  
+
   # rule "*.o", "*.c"
   # rule "**/*.o", "**/.c"
   def rule(glob, dependency, &block)
