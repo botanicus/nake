@@ -3,7 +3,7 @@
 require "nake/task"
 
 module Nake
-  VERSION ||= "0.0.4"
+  VERSION ||= "0.0.5"
   def self.verbose
     @@verbose
   rescue NameError
@@ -42,19 +42,26 @@ module Nake
 
   def self.parse(args = ARGV)
     @result ||= begin
-      args.inject(Hash.new) do |hash, argument|
+      result = args.inject(Hash.new) do |hash, argument|
         hash[:nake] ||= Array.new
         hash[:task] ||= Array.new
-        hash[:file] ||= "tasks.rb" if File.exist?("tasks.rb")
         if argument.match(/^-/) && hash[:task].empty?
           hash[:nake].push(argument)
-        elsif File.exist?(argument)
+        elsif File.exist?(argument) && hash[:file].nil? # just the first one
           hash[:file] = argument
         else
           hash[:task].push(argument)
         end
         hash
       end
+
+      # default value, useful when running nake on systems without
+      # shebang support, so you are using nake -T instead of ./tasks.rb -T
+      if result[:file].nil? && File.exist?("tasks.rb")
+        result[:file] = "tasks.rb"
+      end
+
+      result
     end
   end
 
