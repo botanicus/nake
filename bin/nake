@@ -14,7 +14,7 @@ rescue Exception => exception
   puts "Exception occured during parsing arguments"
   print_exception_with_backtrace_and_abort(exception)
 else
-  if Nake.parse[:nake].include?("--debug") # Nake.debug isn't initialized yet
+  if Nake.parse[:nake] && Nake.parse[:nake].include?("--debug") # Nake.debug isn't initialized yet
     puts "~ Arguments parsed into #{Nake.parse.inspect.green}"
   end
 end
@@ -26,6 +26,10 @@ if Nake.parse[:file]
   rescue Exception => exception
     print_exception_with_backtrace_and_abort(exception)
   end
+elsif File.exist?("tasks.rb")
+  # default value, useful when running nake on systems without
+  # shebang support, so you are using nake -T instead of ./tasks.rb -T
+  Nake.parse[:file] = "tasks.rb"
 else
   abort "You have to specify a file with tasks"
 end
@@ -50,6 +54,8 @@ end
 # run tasks
 begin
   Nake.run_task
+rescue TaskNotFound => exception
+  abort exception.message
 rescue SystemExit => exception
   exit exception.status
 rescue Exception => exception
