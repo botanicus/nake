@@ -31,6 +31,6 @@ end
 Task.new("bm:save") do |task|
   task.description = "Run benchmarks"
   task.define do
-    sh "ruby #{File.dirname(__FILE__)}/bm/bms.rb > bm/output.txt"
+    sh "ruby bm/bms.rb > bm/output.txt"
   end
 end
