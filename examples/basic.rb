@@ -1,7 +1,5 @@
-#!./bin/nake
+#!/usr/bin/env ./bin/nake
 
-# simple
-task(:greet1) do
+task(:greet) do
   puts "Hi #{ENV["USER"]}!"
 end
-

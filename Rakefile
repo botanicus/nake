@@ -5,4 +5,4 @@
 Rake.application.options.trace = true
 
 # default task for RunCodeRun.com
-task(:default) { exec "spec spec" }
+task(:default) { exec "spec spec && cucumber features" }

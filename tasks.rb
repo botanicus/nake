@@ -21,6 +21,13 @@ Nake::Task["hooks:whitespace:install"].tap do |task|
   task.config[:whitelist] = '(bin/[^/]+|.+\.(rb|rake|nake|thor|task))$'
 end
 
+Task.new(:features) do |task|
+  task.description = "Run cucumber scenarios"
+  task.define do
+    sh "cucumber features"
+  end
+end
+
 Task.new(:bm) do |task|
   task.description = "Run benchmarks"
   task.define do

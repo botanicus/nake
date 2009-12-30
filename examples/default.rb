@@ -1,4 +1,4 @@
-#!./bin/nake
+#!/usr/bin/env ./bin/nake
 
 # When you run rake without arguments, it will try to run task called default.
 # Since I don't believe in any stupid convention, I don't support anything similar,
@@ -7,4 +7,4 @@
 # so you have to put this to the end of your file or you might want to use
 # Hash#default_proc=(proc) as described in examples/default_proc.rb like:
 # Task.tasks.default_proc = lambda { |*| Task[:build] }
-Task.tasks.default = Task["-T"]
+Task.tasks.default = Nake.args["-T"] #Task["-T"]

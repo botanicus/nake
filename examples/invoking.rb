@@ -1,5 +1,14 @@
-#!./bin/nake
+#!/usr/bin/env ./bin/nake
+
+task(:inspect) do |*args, options|
+  puts "Arguments: #{args.inspect}"
+  puts "Options: #{options.inspect}"
+end
 
 task(:foo) do
-  Task[:bar].call
+  Task[:inspect].call
+end
+
+task(:bar) do |*args, options|
+  Task[:inspect].call(*args, options)
 end

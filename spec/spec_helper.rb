@@ -17,3 +17,13 @@ def STDOUT.capture(&block)
   $stdout = before
   output
 end
+
+def STDERR.capture(&block)
+  before = self
+  $stderr = StringIO.new
+  block.call
+  $stderr.rewind
+  output = $stderr.read
+  $stderr = before
+  output
+end

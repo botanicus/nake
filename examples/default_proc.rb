@@ -1,4 +1,4 @@
-#!./bin/nake
+#!/usr/bin/env ./bin/nake
 
 # Default value returned from Task["not_existing_task"] don't have to be even a task,
 # it just have to respond to #call, so you can use Hash#default_proc=(proc) as well

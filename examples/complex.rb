@@ -1,4 +1,4 @@
-#!./bin/nake
+#!/usr/bin/env ./bin/nake
 
 Task.new(:release) do |task|
   task.description = "Just release it"

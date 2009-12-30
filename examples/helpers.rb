@@ -1,3 +1,3 @@
-#!./bin/nake
+#!/usr/bin/env ./bin/nake
 
-task(:ls) { sh "ls" }.description = "List available files"
+task(:greet) { sh "echo Hey from shell!" }.description = "Greeting from shell"
