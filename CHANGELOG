@@ -22,3 +22,7 @@
 = Version 0.0.5
   * Benchmarks
   * Some bug fixes
+
+= Version 0.0.6
+  * Cucumber features
+  * DSL helper rule
