@@ -60,7 +60,7 @@ module Nake
       if result[:file].nil? && File.exist?("tasks.rb")
         result[:file] = "tasks.rb"
       end
-
+      
       result
     end
   end

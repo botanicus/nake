@@ -14,3 +14,11 @@
 
 = Version 0.0.3
   * Some bug fixes and task improvements
+
+= Version 0.0.4
+  * Support for arguments parsing
+  * FileTask & file & directory helpers
+
+= Version 0.0.5
+  * Benchmarks
+  * Some bug fixes
