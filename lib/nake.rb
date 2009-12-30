@@ -3,7 +3,7 @@
 require "nake/task"
 
 module Nake
-  VERSION ||= "0.0.6"
+  VERSION ||= "0.0.7"
   def self.verbose
     @@verbose
   rescue NameError
