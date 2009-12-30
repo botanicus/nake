@@ -20,3 +20,17 @@ Nake::Task["hooks:whitespace:install"].tap do |task|
   task.config[:encoding] = "utf-8"
   task.config[:whitelist] = '(bin/[^/]+|.+\.(rb|rake|nake|thor|task))$'
 end
+
+Task.new(:bm) do |task|
+  task.description = "Run benchmarks"
+  task.define do
+    load "#{File.dirname(__FILE__)}/bm/bms.rb"
+  end
+end
+
+Task.new("bm:save") do |task|
+  task.description = "Run benchmarks"
+  task.define do
+    sh "ruby #{File.dirname(__FILE__)}/bm/bms.rb > bm/output.txt"
+  end
+end

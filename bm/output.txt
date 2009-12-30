@@ -1,0 +1,5 @@
+Using nake from ../bin/nake and rake from /Users/botanicus/.rvm/ruby-1.9.1-p376/bin/rake
+
+                      RAKE |    NAKE |
+--------------------------------------
+list tasks           2.665 |   0.044 |
