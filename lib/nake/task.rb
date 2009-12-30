@@ -9,14 +9,7 @@ module Nake
 
   class Task
     def self.[](name)
-      name = name.to_s
-      self.tasks[name] || self.find_in_aliases(name)
-    end
-
-    # @private
-    def self.find_in_aliases(name)
-      _, task = self.tasks.find { |_, task| task.aliases.include?(name) }
-      return task
+      self.tasks[name.to_s]
     end
 
     def self.[]=(name, task)
@@ -35,16 +28,9 @@ module Nake
     end
 
     attr_accessor :name, :description, :dependencies, :hidden, :original_args
-    attr_reader :blocks, :aliases
+    attr_reader :blocks
     def initialize(name, *dependencies, &block)
-      @aliases, @hidden = Array.new, false
-      # This is a bit weird, but it's best solution
-      # when we want to keep API simple and keep it
-      # as one object even if it has more names
-      if name.respond_to?(:join) # array
-        name, *aliases = name
-        self.aliases.push(*aliases)
-      end
+      @hidden = false
       @name, @blocks = name.to_sym, Array.new
       @dependencies  = Array.new
       self.register
@@ -103,7 +89,6 @@ module Nake
     def reset!
       self.dependencies.clear
       self.blocks.clear
-      self.aliases.clear
     end
 
     protected
