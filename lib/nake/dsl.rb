@@ -34,13 +34,22 @@ class Object
     end
   end
 
+  # rule "*.o", "*.c"
+  # rule "**/*.o", "**/.c"
+  def rule(glob, dependency, &block)
+    Dir.glob(glob).each do |path|
+      FileTask.new(path) do |task|
+        task.description = "Generate #{path}"
+        task.define(&block)
+      end
+    end
+  end
+
   def directory(path)
     FileTask.new(path) do |task|
       task.hidden = true # do not show in list
       task.description = "Create directory #{path}"
-      task.define do
-        mkdir_p path
-      end
+      task.define { mkdir_p path }
     end
   end
 end
