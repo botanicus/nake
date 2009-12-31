@@ -33,7 +33,7 @@ module Nake
       task && task.setup(*dependencies, &block) || super(name, *dependencies, &block)
     end
 
-    attr_accessor :name, :description, :dependencies, :hidden, :original_args
+    attr_accessor :name, :dependencies, :hidden, :original_args
     attr_reader :blocks
     def initialize(name, *dependencies, &block)
       @hidden = false
@@ -43,6 +43,20 @@ module Nake
       self.setup(*dependencies, &block)
     end
 
+    attr_writer :description
+    def description
+      if @description.respond_to?(:call)
+        # task.description = lambda { "Edit #{self.config[:task_file]}" }
+        @description.call
+      elsif @description
+        # task.description = "Edit %{task_file}"
+        @description % self.config
+      else
+        nil
+      end
+    end
+
+    attr_writer :config # don't use this if you don't have to!
     def config
       @config ||= begin
         Hash.new do |hash, key|
