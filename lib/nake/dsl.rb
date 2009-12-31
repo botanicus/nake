@@ -10,6 +10,14 @@ class Object
     Nake.args[*names] = block
   end
 
+  # desc :release, "Create a new release"
+  # task(:release) do
+  #   # ...
+  # end
+  def desc(task, description)
+    Task.new(task).description = description
+  end
+
   # Rake-style task definition
   # task(:release, :build) do |task|
   #   # task definition

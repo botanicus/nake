@@ -29,3 +29,4 @@
 
 = Version 0.0.7
   * Added Task#boot method for setting some stuff after other tasks boot
+  * Added DSL helper desc
