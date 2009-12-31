@@ -1,0 +1,4 @@
+#!/usr/bin/env nake
+
+# Run rake tasks with nake
+require "nake/rake"
