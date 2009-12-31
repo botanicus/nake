@@ -2,8 +2,17 @@
 
 require "nake/dsl"
 
-argument("-H", "--help") do
-  Kernel.abort "Use #{$0} -T for list of all available tasks or -i for interactive session"
+argument("-H", "--help") do |task_name = nil|
+  if task_name
+    task = Task[task_name]
+    if task
+      p task # TODO
+    else
+      abort "Task #{task_name} doesn't exist"
+    end
+  else
+    Kernel.abort "Use #{$0} -T for list of all available tasks or -i for interactive session"
+  end
 end
 
 argument("-T", "--tasks") do |pattern = nil|
