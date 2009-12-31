@@ -1,5 +1,8 @@
 #!/usr/bin/env cucumber
 
+# ./bin/nake -T
+# ./bin/nake --verbose -T
+# ./examples/flags.rb --verbose
 Feature: Running bin/nake
   Scenario: Running bin/nake without any arguments
     When I run "./bin/nake"
