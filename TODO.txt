@@ -1,5 +1,21 @@
-- Task#setup
+=== 0.1 ===
+- rework rule
+- update examples
+- features
+- check if everything works
+- README
+- specs
+- update benchmarks
 - yardoc
-- specs & features
-- better argv parsing maybe, task(:spec) do |*paths, options| is fine, but task(:spec) do |path, options| will fail if no path specified ... but actually task(:spec) do |path = "spec", options| might be fine, try it ... BTW task(["-i", "--interactive"]) do |task, *args, options| doesn't work ... putting options as a first argument should solve everything, but it's not very intuitive :/
-- how to solve args inheriting (like if we have task release which depends on task build which takes a gemspec as an argument)
+- refactor bin/nake
+
+=== 0.2 ===
+Task.new(:test) do |task|
+  task.options[:optional] = [:force] # maybe {force: :boolean}
+  task.options[:required] = [:name]
+end
+=> better -T list + validations
+
+=== 0.3 ===
+- nrake & nake/rake for running rake tasks in nake
+- rake2nake
