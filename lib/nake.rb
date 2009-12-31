@@ -79,6 +79,7 @@ module Nake
   # @since 0.0.1
   # @author Jakub Stastny
   def self.run_task
+    Task.boot
     name, *args = Nake.parse[:task]
     task = Task[name]
     if name.nil?

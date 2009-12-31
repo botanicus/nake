@@ -21,6 +21,12 @@ module Nake
       @@tasks ||= Hash.new
     end
 
+    def self.boot
+      self.tasks.each do |name, task|
+        task.boot!
+      end
+    end
+
     # return existing task if task with given name already exist
     def self.new(name, *dependencies, &block)
       task = self[name]
@@ -84,6 +90,40 @@ module Nake
           block.call(*args, options)
         end
       end
+    end
+
+    def bootloaders
+      @bootloaders ||= Array.new
+    end
+
+    def boot_dependencies
+      @boot_dependencies ||= Array.new
+    end
+
+    def boot(*dependencies, &block)
+      self.boot_dependencies.push(*dependencies)
+      self.bootloaders.push(block)
+    end
+
+    def boot!
+      unless self.boot_dependencies.empty? && self.bootloaders.empty?
+        note "Booting #{self.name}"
+      end
+      while dependency = self.boot_dependencies.shift
+        self.class[dependency].tap do |task|
+          if task.nil?
+            raise TaskNotFound, "Task #{dependency} doesn't exist!"
+          end
+          task.boot!
+        end
+      end
+      while block = self.bootloaders.shift
+        block.call
+      end
+    end
+
+    def booted?
+      self.bootloaders.empty? && self.boot_dependencies.empty?
     end
 
     def reset!

@@ -7,6 +7,8 @@ argument("-H", "--help") do
 end
 
 argument("-T", "--tasks") do |pattern = nil|
+  Task.boot
+
   tasks, options = Task.tasks.select { |name, task| not task.hidden? }.sort.partition { |key, value| not key.match(/^-/) }
   arguments = Nake.args.sort
 
@@ -31,6 +33,7 @@ argument("-T", "--tasks") do |pattern = nil|
 end
 
 argument("-i", "--interactive") do |task = nil|
+  Task.boot
   ARGV.clear # otherwise IRB will parse it
 
   require "irb"
