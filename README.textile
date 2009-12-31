@@ -16,6 +16,15 @@ h1. Features
 - Two level of API for defining tasks. @task@ helper is useful for defining simple tasks and if you need something more complicated, you can use @Task.new@
 - *Interactive session* if you run @nake -i@ or @nake -i task@ you get an interactive nake session.
 
+h1. Installation
+
+_Before installation, please ensure that you are running on Ruby 1.9 or higher, Ruby 1.8 isn't supported!_
+
+* From Gemcutter: @gem install nake@
+* JRuby: @jruby --1.9 -S gem install nake@
+* Install edge version via "Rip":http://hellorip.com: @rip install git://github.com/botanicus/nake.git@
+* Install tagged version via "Rip":http://hellorip.com: @rip install git://github.com/botanicus/nake.git 0.1@
+
 h1. Usage
 
 First of all there is a bunch of "examples":github.com/botanicus/nake/tree/master/examples, so you can try them. All these scripts are executable, so just run @./executable/basic.rb -T@ and that's it!
