@@ -7,9 +7,7 @@
 # snake get db_tasks.rb
 # snake get http://gist.github.com/raw/266818/7239049c59b32d07a8af7e26f89190b61e0a7860/snake.rb
 Task.new(:get) do |task|
-  task.boot do
-    task.description = "Add tasks from given file or URL to your #{task.config[:task_file]}"
-  end
+  task.description = "Add tasks from given file or URL to your %{task_file}"
 
   task.define do |path|
     require "open-uri"
@@ -26,12 +24,11 @@ Task.new(:get) do |task|
 end
 
 Task.new(:edit) do |task|
-  task.boot do
-    task.description = "Edit #{Task[:get].config[:task_file]} in your editor"
-  end
+  task.config = Task[:get].config
+  task.description = "Edit %{task_file} in your editor"
 
   task.define do
-    exec((ENV["EDITOR"] || "vim"), Task[:get].config[:task_file])
+    exec((ENV["EDITOR"] || "vim"), task.config[:task_file])
   end
 end
 
