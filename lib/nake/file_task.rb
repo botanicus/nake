@@ -1,9 +1,9 @@
 # encoding: utf-8
 
-require "nake/task"
+require "nake/abstract_task"
 
 module Nake
-  class FileTask < Task
+  class FileTask < AbstractTask
     alias_method :path, :name
 
     def call(args = Array.new, options = Hash.new)
