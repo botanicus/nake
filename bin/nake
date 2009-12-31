@@ -61,3 +61,6 @@ rescue SystemExit => exception
 rescue Exception => exception
   print_exception_with_backtrace_and_abort(exception)
 end
+
+# exit with exit status of the last command
+exit $? ? $?.exitstatus : 0
