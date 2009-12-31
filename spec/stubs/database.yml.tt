@@ -1,0 +1,9 @@
+development:
+  adapter: %{adapter}
+  database: %{name}_development
+  username: root
+
+test:
+  adapter: %{adapter}
+  database: %{name}_test
+  username: root

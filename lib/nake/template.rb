@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 module Nake
   module TaskHelpers
     def template(source, target, context = Hash.new)
