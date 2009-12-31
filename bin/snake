@@ -1,0 +1,44 @@
+#!/usr/bin/env nake
+
+# Snake is similar to sake http://www.rubyinside.com/sake-system-wide-rake-tasks-543.html
+
+# tasks
+
+# snake get db_tasks.rb
+# snake get http://gist.github.com/raw/266818/7239049c59b32d07a8af7e26f89190b61e0a7860/snake.rb
+Task.new(:get) do |task|
+  task.setup do
+    task.description = "Add tasks from given file or URL to your #{task.config[:task_file]}"
+  end
+
+  task.define do |path|
+    require "open-uri"
+    begin
+      open(path) do |stream|
+        File.open(self.config[:task_file], "a") do |file|
+          file.puts(stream.read, "")
+        end
+      end
+    rescue Exception => exception
+      abort exception.message
+    end
+  end
+end
+
+Task.new(:edit) do |task|
+  task.setup do
+    task.description = "Edit #{self.config[:task_file]} in your editor"
+  end
+
+  task.define do
+    exec((ENV["EDITOR"] || "vim"), Task[:get].config[:task_file]
+  end
+end
+
+# setup
+Task[:get].config[:task_file] = File.expand_path("~/.tasks.rb")
+
+# run
+if File.exist?(Task[:get].config[:task_file])
+  load Task[:get].config[:task_file]
+end
