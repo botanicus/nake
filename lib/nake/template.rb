@@ -40,12 +40,12 @@ module Nake
     end
 
     def source(context)
-      ["<% #{self.set_locals(context)} %>", File.read(@path)].join("\n")
+      ["<% #{self.set_locals(context)} %>", File.read(@path)].join("")
     end
 
     def render(context = Hash.new)
       template = ERB.new(self.source(context))
-      template.result
+      template.result(binding)
     end
   end
 end
