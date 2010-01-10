@@ -57,8 +57,9 @@ argument("-i", "--interactive") do |task = nil|
   end
 
   IRB.start
-  exit!
+  exit! # TODO: can we do it without exit? The usecase is ./tasks.rb -i mytask, so we can set env and then run the task
 end
 
-Nake.args["--verbose", "--no-verbose"] = lambda { |key, value| Nake.verbose = value }
-Nake.args["--debug", "--no-debug"]     = lambda { |key, value| Nake.debug = value }
+Nake.args["--verbose",  "--no-verbose"]  = lambda { |key, value| Nake.verbose = value }
+Nake.args["--debug",    "--no-debug"]    = lambda { |key, value| Nake.debug = value }
+Nake.args["--coloring", "--no-coloring"] = lambda { |key, value| Nake.coloring = value }

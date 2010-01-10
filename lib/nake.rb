@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require "nake/task"
-
 module Nake
   VERSION ||= "0.0.8"
   def self.verbose
@@ -22,6 +20,16 @@ module Nake
 
   def self.debug=(boolean)
     @@debug = boolean
+  end
+
+  def self.coloring
+    @@coloring
+  rescue NameError
+    @@coloring = STDIN.tty?
+  end
+
+  def self.coloring=(boolean)
+    @@coloring = boolean
   end
 
   # I was drunk so you might found this code not very clear. But it's clear for me and it works.
@@ -92,5 +100,4 @@ module Nake
   end
 end
 
-require "nake/dsl"
-require "nake/helpers"
+require "nake/task"
