@@ -41,3 +41,8 @@
   * "nake --H build" can provide more informations about given task
   * Task.description can use %{foo} and it will be replaced by values from its config hash
   * Task.description can be a callable object
+
+= Version 0.0.9
+  * Thanks to Task#config=, the configuration can be shared between multiple tasks
+  * Reworked rule, added Rule class
+  * Added --coloring & --no-coloring options
