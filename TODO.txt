@@ -1,9 +1,10 @@
 === 0.1 ===
-- rework rule
+- README
 - update examples
 - features
+
+- rework rule
 - check if everything works
-- README
 - specs
 - update benchmarks
 - yardoc
