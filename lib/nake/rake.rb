@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require "rake/filelist" # rake is distributed with Ruby 1.9 anyway
+require "filelist" # rake is distributed with Ruby 1.9 anyway
 
 module Rake
   def self.method_missing
