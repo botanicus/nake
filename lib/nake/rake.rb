@@ -1,3 +1,7 @@
+# encoding: utf-8
+
+require "rake/filelist" # rake is distributed with Ruby 1.9 anyway
+
 module Rake
   def self.method_missing
     raise NotImplementedError
@@ -5,18 +9,6 @@ module Rake
 
   def self.const_missing(constant)
     raise NotImplementedError, "Nake doesn't support Rake::#{constant}, please use normal Rake"
-  end
-end
-
-# lazy-loading FTW!
-def Object.const_missing(constant)
-  if constant.eql?(:FileList)
-    begin
-      require "filelist"
-      FileList
-    rescue LoadError
-      raise LoadError, "You have to install filelist gem!"
-    end
   end
 end
 
