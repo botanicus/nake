@@ -3,6 +3,7 @@
 - update examples
 - features
 
+- task inheritance => sharing config via super
 - rework rule
 - check if everything works
 - specs
