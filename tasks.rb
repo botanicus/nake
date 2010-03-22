@@ -1,6 +1,15 @@
 #!./bin/nake
 # encoding: utf-8
 
+begin
+  require File.expand_path("../.bundle/environment", __FILE__)
+rescue LoadError
+  require "bundler"
+  Bundler.setup
+end
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __FILE__))
+
 require "nake/tasks/gem"
 require "nake/tasks/spec"
 require "nake/tasks/release"
