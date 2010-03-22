@@ -4,8 +4,18 @@ require "nake/abstract_task"
 
 module Nake
   class FileTask < AbstractTask
+    # TODO: default description na Generate #name
     alias_method :path, :name
 
+    # FileTask can depend on tasks, other file tasks or just files.
+    # If a file task depends on a task, this task isn't supposed to change anything what ...
+    # ... if it's changing something, make sure the changing task is actually called before the file tasks are executed
+    # If the task is changing something so the file will be generated in all cases, you should rather to use normal task
+    # If there are some dependencies on files
+    # FileTask.new("www/index.html") do |task|
+    #   task.file_dependencies.push(*FileList["images/**/*"])
+    #   task.dependencies.push("www") # www task exist
+    # end
     def call(args = Array.new, options = Hash.new)
       will_run = true
       unless self.dependencies.empty?
