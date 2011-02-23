@@ -1,36 +1,7 @@
-= Version 0.0.1
-  * bin/nake executable
-  * sh helper (nake/helpers)
-  * task helper (nake/dsl)
-  * Task with description, dependencies and blocks
-  * Hidden tasks
-  * Each task can has multiple aliases
-  * Command line arguments parsing. Arguments will be passed as an arguments for blocks of the given task and options will be extracted into a hash, parsed into Ruby data types and passed as the last argument for the blocks.
-  * Default tasks for help (-H, --help), list of available tasks (-T, --tasks) and interactive session (-i, --interactive)
-
-= Version 0.0.2
-  * Support for configuration
-  * A lot of useful tasks for releasing, prereleasing, bundling, specs, clean etc.
-
-= Version 0.0.3
-  * Some bug fixes and task improvements
-
-= Version 0.0.4
-  * Support for arguments parsing
-  * FileTask & file & directory helpers
-
-= Version 0.0.5
-  * Benchmarks
-  * Some bug fixes
-
-= Version 0.0.6
-  * Cucumber features
-  * DSL helper rule
-
-= Version 0.0.7
-  * Added Task#boot method for setting some stuff after other tasks boot
-  * Added DSL helper desc
-  * Removed task aliases
+= Version 0.0.9
+  * Thanks to Task#config=, the configuration can be shared between multiple tasks
+  * Reworked rule, added Rule class
+  * Added --coloring & --no-coloring options
 
 = Version 0.0.8
   * Added Nake::Template & template helper
@@ -42,7 +13,36 @@
   * Task.description can use %{foo} and it will be replaced by values from its config hash
   * Task.description can be a callable object
 
-= Version 0.0.9
-  * Thanks to Task#config=, the configuration can be shared between multiple tasks
-  * Reworked rule, added Rule class
-  * Added --coloring & --no-coloring options
+= Version 0.0.7
+  * Added Task#boot method for setting some stuff after other tasks boot
+  * Added DSL helper desc
+  * Removed task aliases
+
+= Version 0.0.6
+  * Cucumber features
+  * DSL helper rule
+
+= Version 0.0.5
+  * Benchmarks
+  * Some bug fixes
+
+= Version 0.0.4
+  * Support for arguments parsing
+  * FileTask & file & directory helpers
+
+= Version 0.0.3
+  * Some bug fixes and task improvements
+
+= Version 0.0.2
+  * Support for configuration
+  * A lot of useful tasks for releasing, prereleasing, bundling, specs, clean etc.
+
+= Version 0.0.1
+  * bin/nake executable
+  * sh helper (nake/helpers)
+  * task helper (nake/dsl)
+  * Task with description, dependencies and blocks
+  * Hidden tasks
+  * Each task can has multiple aliases
+  * Command line arguments parsing. Arguments will be passed as an arguments for blocks of the given task and options will be extracted into a hash, parsed into Ruby data types and passed as the last argument for the blocks.
+  * Default tasks for help (-H, --help), list of available tasks (-T, --tasks) and interactive session (-i, --interactive)
