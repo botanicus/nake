@@ -8,12 +8,11 @@ require "base64"
 
 Gem::Specification.new do |s|
   s.name = "nake"
-  s.version = "0.0.9.1"
+  s.version = "0.0.9.4"
   s.authors = ["Jakub Šťastný aka Botanicus"]
   s.homepage = "http://github.com/botanicus/nake"
   s.summary = "Nake is light-weight and highly flexible Rake replacement with much better arguments parsing"
   s.description = "" # TODO: long description
-  s.cert_chain = nil
   s.email = Base64.decode64("c3Rhc3RueUAxMDFpZGVhcy5jeg==\n")
   s.has_rdoc = true
 
@@ -23,9 +22,6 @@ Gem::Specification.new do |s|
   s.executables = Dir["bin/*"].map(&File.method(:basename))
   s.default_executable = "nake"
   s.require_paths = ["lib"]
-
-  # Ruby version
-  s.required_ruby_version = ::Gem::Requirement.new("~> 1.9")
 
   # dependencies
   s.add_dependency "term-ansicolor"
