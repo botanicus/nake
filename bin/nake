@@ -63,4 +63,4 @@ rescue Exception => exception
 end
 
 # exit with exit status of the last command
-exit $? ? $?.exitstatus : 0
+exit $? ? $?.exitstatus.to_i : 0
