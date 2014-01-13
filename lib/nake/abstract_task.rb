@@ -2,6 +2,7 @@
 
 require "nake/colors"
 require "nake/argv"
+require "nake/helpers"
 
 module Nake
   TaskNotFound ||= Class.new(StandardError)

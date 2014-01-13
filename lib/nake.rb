@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module Nake
-  VERSION ||= "0.0.8"
+  # VERSION ||= "0.0.8.1"
   def self.verbose
     @@verbose
   rescue NameError
