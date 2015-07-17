@@ -8,8 +8,8 @@ require "base64"
 
 Gem::Specification.new do |s|
   s.name = "nake"
-  s.version = "0.1"
-  s.authors = ["Jakub Šťastný aka Botanicus"]
+  s.version = "0.1.1"
+  s.authors = ["James C Russell"]
   s.homepage = "http://github.com/botanicus/nake"
   s.summary = "Nake is light-weight and highly flexible Rake replacement with much better arguments parsing"
   s.description = "" # TODO: long description
